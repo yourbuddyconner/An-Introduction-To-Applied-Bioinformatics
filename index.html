@@ -39,6 +39,8 @@
 
 <p>This project is in very early development stage. It's not ready for prime-time by any means, but I fall firmly into the "publish early, publish often" mindset, hence its public availability. I am very interested in feedback in the form of email (<a href="mailto:gregcaporaso@gmail.com">gregcaporaso@gmail.com</a>) or <a href="https://help.github.com/articles/using-pull-requests">pull requests</a>.</p>
 
+<p>The code in the <code>iab</code> module is <strong>not sufficiently tested, documented, or optimized for production use</strong>. As code reaches those quality standards it will be ported to <a href="http://www.scikit-bio.org">scikit-bio</a>. I do not recommend using the code in the <code>iab</code> module outside of these notebooks. </p>
+
 <p>Currently, the <strong>best example of where I'm hoping to go with these materials</strong> is the <a href="http://nbviewer.ipython.org/github/gregcaporaso/An-Introduction-To-Applied-Bioinformatics/blob/master/algorithms/4-multiple-sequence-alignment.ipynb">multiple sequence alignment</a> chapter.</p>
 
 <h2>
@@ -107,7 +109,10 @@ pip install .
 <a href="http://www.scipy.org/">scipy</a> &gt;= 0.13.0</li>
 <li>
 <a href="http://www.matplotlib.org/">matplotlib</a> &gt;= 1.1.0</li>
-<li><a href="http://www.ipython.org/">IPython</a></li>
+<li>
+<a href="http://pandas.pydata.org/">pandas</a> &gt;= 0.13.1</li>
+<li>
+<a href="http://www.ipython.org/">IPython</a> &gt;= 2.0.0</li>
 <li><a href="http://www.tornadoweb.org/en/stable/">tornado</a></li>
 <li><a href="http://zeromq.github.io/pyzmq/">pyzmq</a></li>
 <li><a href="http://jinja.pocoo.org/">jinja2</a></li>
