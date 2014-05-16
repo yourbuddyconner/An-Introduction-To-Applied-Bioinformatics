@@ -83,12 +83,8 @@
 
 <pre><code>git clone https://github.com/gregcaporaso/An-Introduction-To-Applied-Bioinformatics.git
 cd An-Introduction-To-Applied-Bioinformatics
+pip install numpy
 pip install .
-</code></pre>
-
-<p>If you're using a newer version of pip and scikit-bio fails to install, you may need to modify the pip command to be:</p>
-
-<pre><code>pip install --allow-all-external --allow-unverified scikit-bio --process-dependency-links .
 </code></pre>
 
 <p>Finally, launch the IPython Notebook to get started (be sure that you're in the <code>An-Introduction-To-Applied-Bioinformatics</code> directory when you run this command):</p>
@@ -117,9 +113,11 @@ pip install .
 <li><a href="http://zeromq.github.io/pyzmq/">pyzmq</a></li>
 <li><a href="http://jinja.pocoo.org/">jinja2</a></li>
 <li>
-<a href="http://scikit-bio.org/">scikit-bio</a> (latest GitHub version)</li>
-<li><a href="http://www.biom-format.org">biom-format</a></li>
+<a href="http://scikit-bio.org/">scikit-bio</a> == 0.1.1</li>
+<li>
+<a href="http://www.biom-format.org">biom-format</a> &lt; 2.0.0 (temporarily, soon to be 2.0.0)</li>
 <li><a href="http://biocore.github.io/pyqi/doc/index.html">pyqi</a></li>
+<li><a href="http://python-future.org/">future</a></li>
 </ul><h2>
 <a name="more-information" class="anchor" href="#more-information"><span class="octicon octicon-link"></span></a>More information</h2>
 
