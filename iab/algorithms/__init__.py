@@ -11,8 +11,7 @@ from random import choice, random, shuffle
 
 import numpy as np
 from scipy.cluster.hierarchy import average, dendrogram, to_tree
-from skbio.core.sequence import BiologicalSequence
-from skbio.core.distance import DistanceMatrix
+from skbio import BiologicalSequence, DistanceMatrix, Alignment
 from skbio.core.alignment import local_pairwise_align_ssw
 
 blosum50 = {'A': {'A': 5, 'C': -1, 'D': -2, 'E': -1, 'F': -3, 'G': 0, 'H': -2, 'I': -1, 'K': -1, 'L': -2, 'M': -1, 'N': -1, 'P': -1, 'Q': -1, 'R': -2, 'S': 1, 'T': 0, 'V': 0, 'W': -3, 'Y': -2},
@@ -656,24 +655,134 @@ def fraction_better_or_equivalent_alignments(query_sequence,
 
 ## MSA notebook
 
-def get_k_words(s, k, overlapping=True):
-    result = []
-    len_s = len(s)
-    if overlapping:
-        step = 1
-    else:
-        step = k
-    for i in range(0,len_s,step):
-        if i+k > len_s:
-            # if there are no more k-mers left
-            break
-        else:
-            result.append(s[i:i+k])
-    return result
+from skbio import DNASequence, SequenceCollection as SkbioSequenceCollection
 
-def fraction_unique_words(words1, words2):
-    words1_set = set(words1)
-    words2_set = set(words2)
+class DNA(DNASequence):
+    """ Temporarily overriding skbio.DNASequence
+
+    This is required as I need the functionality introduced in skbio's #507
+    in the MSA chapter, while depending on skbio 0.1.4.
+    https://github.com/biocore/scikit-bio/issues/507
+
+    """
+
+    def distance(self, other, distance_fn=None):
+        """Returns the distance to other
+
+        Parameters
+        ----------
+        other : `BiologicalSequence`
+            The `BiologicalSequence` to compute the distance to.
+        distance_fn : function, optional
+            Function used to compute the distance between `self` and `other`.
+            If ``None`` (the default), `scipy.spatial.distance.hamming` will be
+            used.
+
+        Returns
+        -------
+        float
+            The distance between `self` and `other`.
+
+        Raises
+        ------
+        skbio.core.exception.BiologicalSequenceError
+            If ``len(self) != len(other)``.
+
+        See Also
+        --------
+        fraction_diff
+        fraction_same
+        skbio.core.distance.DistanceMatrix
+        scipy.spatial.distance.hamming
+
+        Examples
+        --------
+        >>> from skbio.core.sequence import BiologicalSequence
+        >>> s = BiologicalSequence('GGUC')
+        >>> t = BiologicalSequence('AGUC')
+        >>> s.distance(t)
+        0.25
+        >>> def dumb_dist(s1, s2): return 0.42
+        >>> s.distance(t, dumb_dist)
+        0.42
+
+        """
+        if distance_fn is None:
+            distance_fn = hamming
+            if len(self) != len(other):
+                raise BiologicalSequenceError(
+                    "Hamming distance can only be computed between "
+                    "BiologicalSequences of equal length.")
+        return distance_fn(self, other)
+
+class SequenceCollection(SkbioSequenceCollection):
+    """ Temporarily overriding skbio.SequenceCollection
+
+    This is required as I need the functionality introduced in skbio's #509
+    in the MSA chapter, while depending on skbio 0.1.4.
+    https://github.com/biocore/scikit-bio/issues/509
+
+    """
+
+    def distances(self, distance_fn):
+        """Compute distances between all pairs of sequences
+
+        Parameters
+        ----------
+        distance_fn : function
+            Function for computing the distance between a pair of sequences.
+            This must take two sequences as input (as BiologicalSequence
+            objects) and return a single integer or float value.
+
+        Returns
+        -------
+        skbio.core.distance.DistanceMatrix
+            Matrix containing the distances between all pairs of sequences.
+
+        Raises
+        ------
+        skbio.core.exception.BiologicalSequenceError
+            If ``len(self) != len(other)`` and ``distance_fn`` ==
+            ``scipy.spatial.distance.hamming``.
+
+        See Also
+        --------
+        skbio.core.distance.DistanceMatrix
+        scipy.spatial.distance.hamming
+
+        Examples
+        --------
+        >>> from scipy.spatial.distance import hamming
+        >>> from skbio.core.alignment import SequenceCollection
+        >>> from skbio.core.sequence import DNA
+        >>> seqs = [DNA("ACCGGGTT", id="s1"),
+        ...         DNA("ACTTGGTT", id="s2"),
+        ...         DNA("ACTAGGTT", id="s3")]
+        >>> a1 = SequenceCollection(seqs)
+        >>> print(a1.distances(hamming))
+        3x3 distance matrix
+        IDs:
+        s1, s2, s3
+        Data:
+        [[ 0.     0.25   0.25 ]
+         [ 0.25   0.     0.125]
+         [ 0.25   0.125  0.   ]]
+
+        """
+        sequence_count = self.sequence_count()
+        dm = np.zeros((sequence_count, sequence_count))
+        ids = []
+        for i in range(sequence_count):
+            self_i = self[i]
+            ids.append(self_i.id)
+            for j in range(i):
+                dm[i, j] = dm[j, i] = self_i.distance(self[j], distance_fn)
+        return DistanceMatrix(dm, ids)
+
+
+def fraction_unique_words(seq1, seq2, k=3):
+    words1_set = set(seq1.k_words(k))
+    words2_set = set(seq2.k_words(k))
     all_words = words1_set | words2_set
     shared_words = words1_set & words2_set
     number_unique = len(all_words) - len(shared_words)
@@ -681,26 +790,18 @@ def fraction_unique_words(words1, words2):
     return result
 
 def kmer_distance(seq1, seq2, k):
-    seq1_k_words = get_k_words(seq1, k)
-    seq2_k_words = get_k_words(seq2, k)
-    return fraction_unique_words(seq1_k_words, seq2_k_words)
+    return fraction_unique_words(seq1_k_words, seq2_k_words, k)
 
 def three_mer_distance(seq1, seq2):
     return kmer_distance(seq1, seq2, k=3)
 
 def guide_tree_from_query_sequences(query_sequences,
-                                    distance_fn=three_mer_distance,
-                                    display_tree = False):
+                                    distance_fn=fraction_unique_words,
+                                    display_tree=False):
     guide_dm = []
     seq_ids = []
-    for seq_id1, seq1 in query_sequences:
-        seq_ids.append(seq_id1)
-        row = []
-        for seq_id2, seq2 in query_sequences:
-            row.append(kmer_distance(seq1, seq2, k=3))
-        guide_dm.append(row)
 
-    guide_dm = DistanceMatrix(guide_dm, seq_ids)
+    guide_dm = query_sequences.distances(distance_fn)
     guide_lm = average(guide_dm.condensed_form())
     guide_tree = to_tree(guide_lm)
     if display_tree:
@@ -736,8 +837,8 @@ def msa_generate_nw_and_traceback_matrices(aln1,aln2,gap_open_penalty,
         for j in range(1,len(aln1[0])+1):
             # computing the subsitution score is different when aligning alignments
             substitution_score = 0
-            aln2_aas = [seq[i-1] for seq in aln2]
-            aln1_aas = [seq[j-1] for seq in aln1]
+            aln2_aas = [str(seq[i-1]) for seq in aln2]
+            aln1_aas = [str(seq[j-1]) for seq in aln1]
             for aa2 in aln2_aas:
                 for aa1 in aln1_aas:
                     if aa1 == "-" or aa2 == "-":
@@ -775,14 +876,13 @@ def msa_generate_nw_and_traceback_matrices(aln1,aln2,gap_open_penalty,
     return nw_matrix, traceback_matrix
 
 def msa_nw_traceback(traceback_matrix,nw_matrix,aln1,aln2,gap_character='-'):
-
     # initialize the result alignments
-    len_aln1 = len(aln1)
+    len_aln1 = aln1.sequence_count()
     aligned_seqs1 = []
     for e in range(len_aln1):
         aligned_seqs1.append([])
 
-    len_aln2 = len(aln2)
+    len_aln2 = aln2.sequence_count()
     aligned_seqs2 = []
     for e in range(len_aln2):
         aligned_seqs2.append([])
@@ -820,9 +920,9 @@ def msa_nw_traceback(traceback_matrix,nw_matrix,aln1,aln2,gap_character='-'):
             raise ValueError, "Invalid value in traceback matrix: %s" % current_value
 
     for i in range(len_aln1):
-        aligned_seqs1[i] = ''.join(aligned_seqs1[i][::-1])
+        aligned_seqs1[i] = ''.join(map(str,aligned_seqs1[i][::-1]))
     for i in range(len_aln2):
-        aligned_seqs2[i] = ''.join(aligned_seqs2[i][::-1])
+        aligned_seqs2[i] = ''.join(map(str,aligned_seqs2[i][::-1]))
 
     return aligned_seqs1, aligned_seqs2, best_score
 
@@ -830,7 +930,8 @@ def msa_nw_align(aln1, aln2, gap_open_penalty=8, gap_extend_penalty=1, substitut
     """ Perform Needleman-Wunsch alignment of seq1 and seq2
     """
     nw_matrix, traceback_matrix = msa_generate_nw_and_traceback_matrices(
-                                    aln1, aln2, gap_open_penalty, gap_extend_penalty, substitution_matrix)
+        Alignment(aln1), Alignment(aln2), gap_open_penalty, gap_extend_penalty,
+        substitution_matrix)
     aligned_seq1, aligned_seq2, score = msa_nw_traceback(traceback_matrix,nw_matrix,aln1,aln2)
     return aligned_seq1, aligned_seq2, score
 
