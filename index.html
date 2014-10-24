@@ -66,7 +66,9 @@
 <li>Studying biological diversity</li>
 </ol>
 </li>
-</ol><h2>
+</ol>
+
+<h2>
 <a name="how-to-read-the-book" class="anchor" href="#how-to-read-the-book"><span class="octicon octicon-link"></span></a>How to read the book</h2>
 
 <p>There are two ways to read <em>An Introduction To Applied Bioinformatics</em>:</p>
@@ -74,17 +76,17 @@
 <ul>
 <li><p>The <em>recommended</em> way to read the book is to download and run the IPython notebooks interactively. You can do this by cloning the GitHub repository, installing the package and its dependencies, and running the notebooks interactively. Instructions for doing this are provided below in the <strong>Installation</strong> section.</p></li>
 <li><p>The <em>easiest</em> way to read the book is to view the static notebooks online using <a href="http://nbviewer.ipython.org/">nbviewer</a>. You should <a href="http://nbviewer.ipython.org/github/gregcaporaso/An-Introduction-To-Applied-Bioinformatics/blob/master/Index.ipynb">start here</a>.</p></li>
-</ul><p>If you're new to using IPython or the IPython Notebook, you can find more information at the <a href="http://www.ipython.org/">IPython website</a>, <a href="http://ipython.org/notebook">IPython Notebook website</a>, and the <a href="https://github.com/ipython/ipython/wiki/A-gallery-of-interesting-IPython-Notebooks">IPython Notebook example gallery</a>.</p>
+</ul>
+
+<p>If you're new to using IPython or the IPython Notebook, you can find more information at the <a href="http://www.ipython.org/">IPython website</a>, <a href="http://ipython.org/notebook">IPython Notebook website</a>, and the <a href="https://github.com/ipython/ipython/wiki/A-gallery-of-interesting-IPython-Notebooks">IPython Notebook example gallery</a>.</p>
 
 <h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <p>If you're going to read the book interactively (recommended), you'll need to clone this repository, install some dependencies, and launch the IPython Notebook. For example, the following commands should work for Linux and Mac OS X users:</p>
 
-<pre><code>git clone https://github.com/gregcaporaso/An-Introduction-To-Applied-Bioinformatics.git
-cd An-Introduction-To-Applied-Bioinformatics
-pip install numpy
-pip install .
+<pre><code>pip install numpy
+pip install https://github.com/gregcaporaso/An-Introduction-To-Applied-Bioinformatics/archive/master.zip
 </code></pre>
 
 <p>Finally, launch the IPython Notebook to get started (be sure that you're in the <code>An-Introduction-To-Applied-Bioinformatics</code> directory when you run this command):</p>
@@ -93,32 +95,6 @@ pip install .
 </code></pre>
 
 <p>That's it!</p>
-
-<p>If you'd like to install the book's dependencies manually (or some other way than using pip), here's what you'll need:</p>
-
-<ul>
-<li>
-<a href="http://www.python.org/">Python</a> 2.7</li>
-<li>
-<a href="http://www.numpy.org/">numpy</a> &gt;= 1.7</li>
-<li>
-<a href="http://www.scipy.org/">scipy</a> &gt;= 0.13.0</li>
-<li>
-<a href="http://www.matplotlib.org/">matplotlib</a> &gt;= 1.1.0</li>
-<li>
-<a href="http://pandas.pydata.org/">pandas</a> &gt;= 0.13.1</li>
-<li>
-<a href="http://www.ipython.org/">IPython</a> &gt;= 2.0.0</li>
-<li><a href="http://www.tornadoweb.org/en/stable/">tornado</a></li>
-<li><a href="http://zeromq.github.io/pyzmq/">pyzmq</a></li>
-<li><a href="http://jinja.pocoo.org/">jinja2</a></li>
-<li>
-<a href="http://scikit-bio.org/">scikit-bio</a> == 0.1.4</li>
-<li>
-<a href="http://www.biom-format.org">biom-format</a> &lt; 2.0.0 (temporarily, soon to be 2.0.0)</li>
-<li><a href="http://biocore.github.io/pyqi/doc/index.html">pyqi</a></li>
-<li><a href="http://python-future.org/">future</a></li>
-</ul><p>Note that even if you have all of the above dependencies installed, you should still run <code>pip install .</code> as there is a small, required codebase included with the book (the <code>iab</code> module).</p>
 
 <h2>
 <a name="more-information" class="anchor" href="#more-information"><span class="octicon octicon-link"></span></a>More information</h2>
