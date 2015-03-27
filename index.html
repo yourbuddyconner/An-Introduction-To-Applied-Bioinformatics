@@ -35,16 +35,16 @@
 <p>I teach bioinformatics at the undergraduate and graduate levels at Northern Arizona University. This repository contains some of the materials that I've developed in these courses, and represents an initial attempt to organize these materials in a standalone way. If you'd like to read a little more about the project, see my <a href="http://microbe.net/2014/05/01/teaching-bioinformatics-using-ipython-notebooks/">blog post</a> on <a href="http://microbe.net">microbe.net</a>.</p>
 
 <h2>
-<a name="disclaimer" class="anchor" href="#disclaimer"><span class="octicon octicon-link"></span></a>Disclaimer</h2>
+<a id="disclaimer" class="anchor" href="#disclaimer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Disclaimer</h2>
 
-<p><strong>This project is in very early development stage.</strong> It's not ready for prime-time by any means, but I fall firmly into the "publish early, publish often" mindset, hence its public availability. I am very interested in feedback in the form of email (<a href="mailto:gregcaporaso@gmail.com">gregcaporaso@gmail.com</a>) or <a href="https://help.github.com/articles/using-pull-requests">pull requests</a>.</p>
+<p><strong>This project is in very early development stage.</strong> It's not ready for prime-time by any means, but I fall firmly into the "publish early, publish often" mindset, hence its public availability. I am very interested in feedback. The best way to get feedback to me is through <a href="https://github.com/gregcaporaso/An-Introduction-To-Applied-Bioinformatics/issues">the IAB issue tracker</a>, and the best way to get me contributions is through <a href="https://help.github.com/articles/using-pull-requests">pull requests</a>.</p>
 
 <p>The code in the iab module is <strong>not sufficiently tested, documented, or optimized for production use</strong>. As code reaches those quality standards it will be ported to <a href="http://www.scikit-bio.org">scikit-bio</a>. I do not recommend using the code in the iab module outside of these notebooks. In other words, don't <code>import iab</code> outside of the notebooks - if you want access to the functionality in your own code, you should <code>import skbio</code>.</p>
 
 <p>Currently, the <strong>best example of where I'm hoping to go with these materials</strong> is the <a href="http://nbviewer.ipython.org/github/gregcaporaso/An-Introduction-To-Applied-Bioinformatics/blob/master/algorithms/4-multiple-sequence-alignment.ipynb">multiple sequence alignment</a> chapter.</p>
 
 <h2>
-<a name="outline" class="anchor" href="#outline"><span class="octicon octicon-link"></span></a>Outline</h2>
+<a id="outline" class="anchor" href="#outline" aria-hidden="true"><span class="octicon octicon-link"></span></a>Outline</h2>
 
 <p>To browse the book, <a href="http://nbviewer.ipython.org/github/gregcaporaso/An-Introduction-To-Applied-Bioinformatics/blob/master/Index.ipynb">start here</a>.</p>
 
@@ -69,49 +69,62 @@
 </ol>
 
 <h2>
-<a name="how-to-read-the-book" class="anchor" href="#how-to-read-the-book"><span class="octicon octicon-link"></span></a>How to read the book</h2>
+<a id="how-to-use-an-introduction-to-applied-bioinformatics" class="anchor" href="#how-to-use-an-introduction-to-applied-bioinformatics" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use <em>An Introduction To Applied Bioinformatics</em>
+</h2>
 
-<p>There are two ways to read <em>An Introduction To Applied Bioinformatics</em>:</p>
+<p>There are two ways to use <em>An Introduction To Applied Bioinformatics</em>:</p>
 
 <ul>
-<li><p>The <em>recommended</em> way to read the book is to download and run the IPython notebooks interactively. You can do this by cloning the GitHub repository, installing the package and its dependencies, and running the notebooks interactively. Instructions for doing this are provided below in the <strong>Installation</strong> section.</p></li>
-<li><p>The <em>easiest</em> way to read the book is to view the static notebooks online using <a href="http://nbviewer.ipython.org/">nbviewer</a>. You should <a href="http://nbviewer.ipython.org/github/gregcaporaso/An-Introduction-To-Applied-Bioinformatics/blob/master/Index.ipynb">start here</a>.</p></li>
+<li><p>The <em>recommended</em> way is to install it and work with it interactively. See the instructions below.</p></li>
+<li>
+<p>The <em>easiest</em> way is to view the static notebooks online using <a href="http://nbviewer.ipython.org/">nbviewer</a>. You should:</p>
+
+<ul>
+<li>
+<a href="http://nbviewer.ipython.org/github/gregcaporaso/An-Introduction-To-Applied-Bioinformatics/blob/0.1.0/Index.ipynb">start here to view the latest release version</a>, or</li>
+<li>
+<a href="http://nbviewer.ipython.org/github/gregcaporaso/An-Introduction-To-Applied-Bioinformatics/blob/master/Index.ipynb">start here to view the development version</a> (which will have the latest content, but will be less polished and possibly buggy).</li>
+</ul>
+</li>
 </ul>
 
 <p>If you're new to using IPython or the IPython Notebook, you can find more information at the <a href="http://www.ipython.org/">IPython website</a>, <a href="http://ipython.org/notebook">IPython Notebook website</a>, and the <a href="https://github.com/ipython/ipython/wiki/A-gallery-of-interesting-IPython-Notebooks">IPython Notebook example gallery</a>.</p>
 
 <h2>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-<p>If you're going to read the book interactively (recommended), you'll need to clone this repository, install some dependencies, and launch the IPython Notebook. For example, the following commands should work for Linux and Mac OS X users:</p>
+<p>If you're going to read <em>An Introduction to Applied Bioinformatics</em> interactively (recommended), you'll need to install it. The following commands should work for Linux and Mac OS X users:</p>
 
 <pre><code>pip install numpy
-pip install https://github.com/gregcaporaso/An-Introduction-To-Applied-Bioinformatics/archive/master.zip
+wget https://github.com/gregcaporaso/An-Introduction-To-Applied-Bioinformatics/archive/0.1.0.tar.gz
+tar -xzf 0.1.0.tar.gz
+cd An-Introduction-To-Applied-Bioinformatics-0.1.0
+pip install .
 </code></pre>
 
-<p>Finally, launch the IPython Notebook to get started (be sure that you're in the <code>An-Introduction-To-Applied-Bioinformatics</code> directory when you run this command):</p>
+<p>Then, launch the IPython Notebook to get started (be sure that you're in the <code>An-Introduction-To-Applied-Bioinformatics</code> directory when you run this command):</p>
 
-<pre><code>ipython notebook --pylab inline Index.ipynb
+<pre><code>ipython notebook Index.ipynb
 </code></pre>
 
 <p>That's it!</p>
 
 <h2>
-<a name="more-information" class="anchor" href="#more-information"><span class="octicon octicon-link"></span></a>More information</h2>
+<a id="more-information" class="anchor" href="#more-information" aria-hidden="true"><span class="octicon octicon-link"></span></a>More information</h2>
 
 <p>These materials are primarily being developed by <a href="http://caporasolab.us/people/greg-caporaso/">Greg Caporaso</a> (GitHub: <a href="https://github.com/gregcaporaso">@gregcaporaso</a>) in the <a href="http://www.caporasolab.us">Caporaso Lab</a> at <a href="http://www.nau.edu">Northern Arizona University</a>. You can find information on the courses I teach on <a href="http://www.caporasolab.us/teaching">my teaching website</a> and information on my research and lab on <a href="http://www.caporasolab.us">my lab website</a>.</p>
 
 <p>See the repository's <a href="https://github.com/gregcaporaso/An-Introduction-To-Applied-Bioinformatics/graphs/contributors">contributors page</a> for information on who has contributed to the project.</p>
 
 <h2>
-<a name="acknowledgements" class="anchor" href="#acknowledgements"><span class="octicon octicon-link"></span></a>Acknowledgements</h2>
+<a id="acknowledgements" class="anchor" href="#acknowledgements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Acknowledgements</h2>
 
 <p>Development of <em>An Introduction to Applied Bioinformatics</em> was supported in part by <a href="http://nau.edu/Research/Funding/Technology-Research-Initiative-Fund/">Arizona's Technology and Research Initiative Fund</a>. The style of the project was inspired by <a href="http://camdavidsonpilon.github.io/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/">Bayesian Methods for Hackers</a>.</p>
 
 <p>I want to thank the <a href="https://github.com/ipython/ipython/graphs/contributors">IPython Developers</a> for all of their work on the <a href="http://www.ipython.org/notebook">IPython Notebook</a>, as well as the <a href="https://github.com/biocore/qiime/graphs/contributors">QIIME developers</a> and <a href="https://github.com/biocore/scikit-bio/graphs/contributors">scikit-bio developers</a> for the countless discussions over the years that helped me develop my understanding of the material presented here. This project wouldn't be possible without all of you, and I look forward to many more years of productive, fun and exciting work together!</p>
 
 <h2>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a><br>An Introduction to Applied Bioinformatics by <a href="http://www.caporasolab.us">The Caporaso Laboratory</a> is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br>Based on a work at <a href="https://github.com/gregcaporaso/An-Introduction-To-Applied-Bioinformatics"></a><a href="https://github.com/gregcaporaso/An-Introduction-To-Applied-Bioinformatics">https://github.com/gregcaporaso/An-Introduction-To-Applied-Bioinformatics</a>.</p>
       </section>
