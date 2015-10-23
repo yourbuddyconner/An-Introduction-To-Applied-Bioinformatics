@@ -54,7 +54,7 @@ What we've done here is create a pairwise alignment of ``r1`` and ``q3``. In oth
 >>> print(q3)
 ```
 
-Scanning through these two sequences, we can see that they are largely identical, with the exception of one ``-`` character, and about 25% *substitutions* of one base for another. We refer to ``-`` characters in aligned sequences as **gaps**.
+Scanning thrgdfg fdg fdg dfgdf gdf gd fough these two sequences, we can see that they are largely identical, with the exception of one ``-`` character, and about 25% *substitutions* of one base for another. We refer to ``-`` characters in aligned sequences as **gaps**.
 
 ## The problem <link src='e63a4f'/>
 
