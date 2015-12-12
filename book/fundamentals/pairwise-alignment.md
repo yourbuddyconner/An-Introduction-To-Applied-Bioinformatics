@@ -66,7 +66,7 @@ Sequence alignment is tricky for several reasons:
  * As sequences are more distantly related, there are fewer identical stretches of bases or amino acid residues, making it harder to determine what the most biologically relevant alignment is.
  * When the sequences get very long, sequence alignment becomes a very computationally expensive problem.
 
-In the next section we'll work through one algorithm for aligning a pair of sequences. As you work through this exercise, try to make a list of the assumptions that we're making that violate what you know about how sequences evolve.
+In the next section we'll work through one algorithm for aligning a pair of sequences. As you work through this exercise, make a list of the assumptions that we're making that violate what you know about how sequences evolve.
 
 ## A simple procedure for aligning a pair of sequences <link src='86c6b7'/>
 
@@ -157,17 +157,20 @@ Alignment score: 8
 
 **Remember that an alignment represents a hypothesis about the evolutionary history of a sequence.  Which of these hypotheses do you think is more likely to be true based on what you know about sequence evolution?**
 
-**As an exercise**, scroll back to where we defined `seq1` and `seq2` and redefine one or both of those as other sequences. Execute that cell, and the one up to the previous cell, and transcribe the highest scoring alignment.
+**As an exercise**, go back to where we defined `seq1` and `seq2` and redefine one or both of those as other sequences. Execute the code through here and transcribe the highest scoring alignment.
 
-**Complexities**: why this simple procedure is too simple
+### Why this simple procedure is too simple
 
-1. We're scoring all matches as 1 and all mismatches as 0. This suggests that all substitutions are treated equally. What's a more biologically meaningful way to do this (e.g., in protein alignments)?
+I suggested above that you keep a list of assumptions that are made by this approach. Here are a couple of the very problematic ones.
+
+1. We're scoring all matches as 1 and all mismatches as 0. This suggests that all matches are equally likely, and all mismatches are equally unlikely. What's a more biologically meaningful way to do this (think about protein sequences here)?
 2. Similarly, every gap that is introduced results in the same penalty being incurred. Based on what we know about how insertion/deletion events occur, it likely makes more sense to score *opening a new gap* differently from *extending an existing gap*.
-3. When searching a novel sequence against a database, you may have billions of bases to search against (which would correspond to billions of columns in these matrices). How can this be done efficiently? How can you determine if a hit is statistically meaningful or the result of chance?
 
-All scoring schemes have limitations, and you should consider alignments that come back from systems such as BLAST as hypotheses. You still need to do your due diligence to decide if you agree with the result that a computational system gives you. They are there to help you do your work, but their answers are based on models and the models are not perfect. Be skeptical!
+All scoring schemes have limitations, and you should consider alignments that you get (e.g., from systems such as [BLAST](http://blast.ncbi.nlm.nih.gov/Blast.cgi)) as hypotheses. You'll need to determine if you agree with the result that a computational system gives you. Algorithms such as the one we just explored are there to help you do your work, but their answers are based on models (for example, how we model matches, mismatches and gaps here) and as we're learning here, the models are not perfect. Be skeptical!
 
-Over the next several sections we'll explore ways of addressing each of these complexities. This notebook covers solutions to address the first and second. We'll introduce the problem of the third in this notebook, but save exploring solutions for the next chapter.
+Another important consideration as we think about algorithms for aligning pairs of sequences is how long this will take to run (or in technical terminology, the [computational complexity](http://bigocheatsheet.com/) of the algorithm). When searching a novel sequence against a database, you may have billions of bases to search against (which would correspond to billions of columns in these matrices). How can this be done efficiently?
+
+Over the next several sections we'll explore ways of addressing the two issues noted above. We'll introduce the problem of the computational complexity at the end of this chapter, and explore approaches for addressing that (i.e., making database searching faster) in the next chapter.
 
 ## Substitution matrices <link src='9f5e71'/>
 
