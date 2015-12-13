@@ -118,7 +118,7 @@ These are some books that I've enjoyed, and which helped get me thinking about b
 
 * [The Selfish Gene](http://amzn.to/1UkyQ1R) by Richard Dawkins.
 
-* [Ever Since Darwin](http://amzn.to/1Ukzdt7) by Stephen Jay Gould
+* [Ever Since Darwin](http://amzn.to/1Ukzdt7) by Stephen Jay Gould. *This is the first book in a series of collections of short essays.*
 
 * [The Demon Haunted World](http://amzn.to/1UkyIzi) by Carl Sagan.
 
