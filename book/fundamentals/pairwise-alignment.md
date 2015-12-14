@@ -31,32 +31,38 @@ Imagine you have three sequences - call them ``r1``and ``r2`` (*r* is for *refer
 
 In this case, ``q1`` has a smaller distance to ``r1`` than it does to ``r2``, so ``q1`` is more similar to ``r1`` than ``r2``. But it's not always that simple.
 
-Here we've assuming that only *substitution events* have occurred, meaning the substitution of one DNA base with another. Let's define ``q2``, which is the same as ``q1`` except that a single base has been deleted at the beginning of the sequence, and a single base has been added at the end of the sequence. (Note: it's required that if we have a deletion we also have an insertion, because ``hamming`` is only defined for sequences of equal length.)
+Here we've assuming that only *substitution events* have occurred, meaning one DNA base was substituted for with another. Let's define ``q2``, which is the same as ``q1`` except that a single base has been deleted at the beginning of the sequence, and a single base has been inserted at the end of the sequence.
 
 ```python
 >>> q2 = DNA("TCCAGGTAAACGGTGACCAGGTACCAGTTGCGTTTGTTGTAGGAGACACGGGGACCCAT")
 >>> print(hamming(r1, q2))
 ```
 
-This change had a big effect on the distance between the two sequences. If this is a protein coding sequence, maybe that's reasonable, but given what we know about how biological sequences evolve this doesn't seem biologically justified. In this case, it seems that an insertion or deletion (i.e., an **indel**) event has shifted one sequence relative to the other, which resulted in many of the bases "downstream" of the indel being different.
+This change had a big effect on the distance between the two sequences. In this case, the deletion event at the beginning of ``q2`` has shifted that sequence relative to ``r1``, which resulted in many of the bases "downstream" of the deleted base being different. However the sequences do still seem fairly similar, so perhaps this relatively large distance isn't biologically justified.
 
-What we'd really want to do is have a way to indicate that an indel seems to have occurred in ``q2``. Let's define ``q3``, where we use a ``-`` character to indicate a deletion with respect to ``r1``. This results in what seems like a more reasonable distance between the two sequences:
+What we'd really want to do is have a way to indicate that a deletion seems to have occurred in ``q2``. Let's define ``q3``, where we use a ``-`` character to indicate a deletion with respect to ``r1``. This results in what seems like a more reasonable distance between the two sequences:
 
 ```python
 >>> q3 = DNA("-TCCAGGTAAACGGTGACCAGGTACCAGTTGCGTTTGTTGTAGGAGACACGGGGACCCA")
 >>> print(hamming(r1, q3))
 ```
 
-What we've done here is create a pairwise alignment of ``r1`` and ``q3``. In other words, we've **aligned** the positions that we hypothesize were derived from the same position in some ancestral sequence. The *alignment* is clear if we print these two sequence out one on top of the other:
+What we've done here is create a pairwise alignment of ``r1`` and ``q3``. In other words, we've **aligned** the positions that minimize the similarity of the two sequences, using the ``-`` to fill in spaces where one character is missing with respect to the other sequence. We refer to ``-`` characters in aligned sequences as **gap characters**, or gaps.
+
+The *alignment* is of these two sequences is clear if we print them  out, one on top of the other:
 
 ```python
 >>> print(r1)
 >>> print(q3)
 ```
 
-Scanning through these two sequences, we can see that they are largely identical, with the exception of one ``-`` character, and about 25% *substitutions* of one base for another. We refer to ``-`` characters in aligned sequences as **gaps**.
+Scanning through these two sequences, we can see that they are largely identical, with the exception of one ``-`` character, and about 25% *substitutions* of one base for another.
 
-## The problem <link src='e63a4f'/>
+When working with a pair of sequences, when we see a gap we generally won't know whether a deletion occurred in one sequence, or an insertion occurred in the other. For that reason, you will often see the term *indel* used to refer to these events, indicating that either an insertion or a deletion occurred.
+
+## What is a sequence alignment? <link src='e63a4f'/>
+
+Let's take a minute to think about what a biological sequence alignment actually is. 
 
 The problem of **pairwise sequence alignment** is, **given two sequences, generate a hypothesis about which bases were derived from a common ancestor**. In other words, we align them to one another inserting gaps as necessary, in a way that maximizes their similarity.
 
@@ -174,9 +180,15 @@ Over the next several sections we'll explore ways of addressing the two issues n
 
 ## Substitution matrices <link src='9f5e71'/>
 
-The first of the limitations we identified above was that all matches and mismatches are scored equally, though we know that that isn't the most biologically meaningful way to score an alignment. We'll next explore a more general approach to the problem of *global sequence alignment* for protein sequences, or aligning a pair of protein sequences from beginning to end. We'll start by defining a **substitution matrix which defines the score associated with substitution of one amino acid for another**.
+The first of the limitations we identified above was that all matches and mismatches were scored equally when aligning a pair of sequences. To understand why this is a problem, let's think about the meaning of match and mismatches.
 
-Early work on defining protein substitution matrices was performed by Dayhoff in the 1970s and by Henikoff and Henikoff in the early 1990s. We'll start by working with a substitution matrix known as the blosum 50 matrix, which was [presented in PNAS in 1992](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC50453/). Briefly, these matrices are defined empirically, by aligning sequences manually or through automated systems, and counting how frequent certain substitutions are. There is a good [wikipedia article on this topic](http://en.wikipedia.org/wiki/BLOSUM).
+When we align a pair of
+
+ though we know that that isn't the most biologically meaningful way to score an alignment. This is particularly the case for protein sequences, where each amino acid residue has different chemical properties, that impact the structure and function of the protein.
+
+We'll next explore a more general approach to the problem of *global sequence alignment* for protein sequences, or aligning a pair of protein sequences from beginning to end. We'll start by defining a **substitution matrix which defines the score associated with substitution of one amino acid for another**.
+
+Early work on defining protein substitution matrices was performed by Dayhoff in the 1970s and by Henikoff and Henikoff in the early 1990s. We'll start by working with a substitution matrix known as the blosum 50 matrix, which was [presented in PNAS in 1992](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC50453/). There are many different criteria that can be used to define how likely the substitution of Briefly, these matrices are defined empirically, by aligning sequences manually or through automated systems, and counting how frequent certain substitutions are. There is a good [wikipedia article on this topic](http://en.wikipedia.org/wiki/BLOSUM).
 
 We can import this from the ``iab`` support module, and then look up scores for substitutions of amino acids. Based on these scores and the biochemistry of the amino acids ([see the molecular structures on Wikipedia](http://en.wikipedia.org/wiki/Amino_acid)), does a positive score represent a more or less favorable substitution?
 
@@ -471,7 +483,7 @@ And finally, during the traceback step, you begin in the cell with the highest v
 >>> print(score)
 ```
 
-Again, we can define a *convenience function*, which will allow us to provide the required input and just get our aligned sequecnes back.
+Again, we can define a *convenience function*, which will allow us to provide the required input and just get our aligned sequences back.
 
 ```python
 >>> from skbio.alignment import local_pairwise_align
@@ -479,7 +491,7 @@ Again, we can define a *convenience function*, which will allow us to provide th
 >>> %psource local_pairwise_align
 ```
 
-And we can take the *convenience function* one step futher, and wrap `sw_align` and `nw_align` up in a more general `align` function, which takes a boolean parameter (i.e., `True` or `False`) indicating where we want a local or global alignment.
+And we can take the *convenience function* one step further, and wrap `sw_align` and `nw_align` up in a more general `align` function, which takes a boolean parameter (i.e., `True` or `False`) indicating where we want a local or global alignment.
 
 ```python
 >>> def align(sequence1, sequence2, gap_penalty, substitution_matrix, local):
@@ -566,7 +578,7 @@ The convenience functions we worked with above all take ``gap_open_penalty`` and
 
 ## How long does pairwise sequence alignment take? <link src='ac446d'/>
 
-The focus of this course is *applied* bioinformatics, and **some of the practical considerations we need to think about when developing applications is their runtime and memory requirements**. The third issue we mentioned above is general to the problem of sequence alignment: runtime can be problematic. Over the next few cells we'll explore the runtime of sequence alignment.
+The focus of this book is *applied* bioinformatics, and **some of the practical considerations we need to think about when developing applications is their runtime and memory requirements**. The third issue we mentioned above is general to the problem of sequence alignment: runtime can be problematic. Over the next few cells we'll explore the runtime of sequence alignment.
 
 We just worked through a few algorithms for pairwise sequence alignment, and used some toy examples with short sequences. What if we wanted to scale this up to align much longer sequences, or to align relatively short sequences against a large database?
 
@@ -596,7 +608,7 @@ Next, let's apply this to pairs of sequences where we vary the length. We don't 
 >>> print(random_sequence(DNA, 50))
 ```
 
-Next, let's define a loop where we align, randomly, pairs of sequences of increasing length, and compile the time it took to align the sequences. Here we're going to use a faster version of pairwise alignment that's implemented in scikit-bio, to faciliate testing with more alignments.
+Next, let's define a loop where we align, randomly, pairs of sequences of increasing length, and compile the time it took to align the sequences. Here we're going to use a faster version of pairwise alignment that's implemented in scikit-bio, to facilitate testing with more alignments.
 
 ```python
 >>> import timeit
@@ -633,7 +645,7 @@ That's expected, but what we care about is how they're increasing. Can we use th
 >>> plt.ylabel('Runtime (s)')
 ```
 
-**One good question is whether developing a version of this algorithm which can run in parallel would be an effective way to make it scale to larger data sets.** In the next cell, we look and how the plot would change if we could run the alignment process over four processors. This would effectively make each alignment run four times as fast (so each runtime would be divided by four) but it doesn't solve our scability problem.
+**One good question is whether developing a version of this algorithm which can run in parallel would be an effective way to make it scale to larger data sets.** In the next cell, we look and how the plot would change if we could run the alignment process over four processors. This would effectively make each alignment run four times as fast (so each runtime would be divided by four) but it doesn't solve our scalability problem.
 
 ```python
 >>> # if we could split this process over more processors (four, for example)
