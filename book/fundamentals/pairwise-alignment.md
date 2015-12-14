@@ -70,7 +70,7 @@ Let's take a minute to think about sequence evolution and what a biological sequ
 
 (Other types of mutation events can occur, but we're going to focus on these for now.)
 
-Figure 1a-c illustrates how one ancestral DNA sequence, over time, might evolve into four derived sequences. 
+Figure 1a-b illustrates how one ancestral DNA sequence, over time, might evolve into two derived sequences. When a two or more sequences are derived from a single ancestral sequence, as is the case in this example, those sequences are said to be **homologs** of one another, or homologous sequences. On a piece of paper, make a guess about which of these types of events occurred where over our hypothetical evolution of these sequences.
 
 <figure>
     <img src="https://raw.githubusercontent.com/gregcaporaso/An-Introduction-To-Applied-Bioinformatics/pw-align-edits/book/fundamentals/images/alignment.png">
@@ -78,15 +78,21 @@ Figure 1a-c illustrates how one ancestral DNA sequence, over time, might evolve 
 </figure>
 <p>
 
-The problem of **pairwise sequence alignment** is, **given two sequences, generate a hypothesis about which bases were derived from a common ancestor**. In other words, we align them to one another inserting gaps as necessary, in a way that maximizes their similarity.
+The problem of **pairwise sequence alignment** is, **given two sequences, generate a hypothesis about which bases were derived from a common ancestor**. In practice, we develop this hypothesis by aligning the sequences to one another inserting gaps as necessary, in a way that maximizes their similarity.
 
-Sequence alignment is tricky for several reasons:
+In nearly all cases, all we have to work with is the modern (derived) sequences, as illustrated in Figure 1c. The ancestral sequence is not something we have access to (for example, because the organism whose genome it was present in went extinct 100 million years ago).
+
+Figure 1d illustrates an alignment of these two sequences. It is essential to note at this point that this is one possible alignment of these sequences. And just as the notes you made about which types of mutation events may have happened where represents your *hypothesis* about the evolutionary events that took place, a sequence alignment is only a hypothesis.
+
+You can think of an alignment as a table, where the rows are sequences and the columns are positions in those sequences. When you have two or more aligned sequences, there will, by definition, always be the same number of columns in each row. Each column in your alignment represents a hypothesis about the evolution events that occurred at that position since the last ancestor of the aligned sequences (the sequence in Figure 1a in our example).
+
+As you can likely tell from this example, sequence alignment is tricky for several reasons:
  * Because of insertion/deletion mutations, it's not always clear which bases or amino acid residues are derived from the same common ancestral base or amino acid residue.
  * As sequences get long, there may be many possible ways to align them. We need to figure out which of those alignments is the best hypothesis in light of what we know about the (very messy) underlying biological systems.
  * As sequences are more distantly related, there are fewer identical stretches of bases or amino acid residues, making it harder to determine what the most biologically relevant alignment is.
  * When the sequences get very long, sequence alignment becomes a very computationally expensive problem.
 
-In the next section we'll work through one algorithm for aligning a pair of sequences. As you work through this exercise, make a list of the assumptions that we're making that violate what you know about how sequences evolve.
+In the next section we'll work through one algorithm for aligning a pair of sequences. As you work through this exercise, think about why it might be too simple given what you know about biological sequence evolution.
 
 ## A simple procedure for aligning a pair of sequences <link src='86c6b7'/>
 
