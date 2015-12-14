@@ -62,7 +62,21 @@ When working with a pair of sequences, when we see a gap we generally won't know
 
 ## What is a sequence alignment? <link src='e63a4f'/>
 
-Let's take a minute to think about what a biological sequence alignment actually is. 
+Let's take a minute to think about sequence evolution and what a biological sequence alignment actually is. Over the course of evolution, the sequence will likely change, most frequently due to random errors in replication (or the copying of a DNA sequence), or **mutations**. Some of the types of mutation events that can occur are:
+
+* **substitutions**, where one base (or amino acid, in protein sequences) is replaced with another;
+* **insertions**, where one or more contiguous bases are inserted in a sequence;
+* and **deletions**, where one or more contiguous bases are deleted from a sequence.
+
+(Other types of mutation events can occur, but we're going to focus on these for now.)
+
+Figure 1a-c illustrates how one ancestral DNA sequence, over time, might evolve into four derived sequences. 
+
+<figure>
+    <img src="https://raw.githubusercontent.com/gregcaporaso/An-Introduction-To-Applied-Bioinformatics/pw-align-edits/book/fundamentals/images/alignment.png">
+    <figcaption>Figure 1: Sequence evolution and biological sequence alignment.</figcaption>
+</figure>
+<p>
 
 The problem of **pairwise sequence alignment** is, **given two sequences, generate a hypothesis about which bases were derived from a common ancestor**. In other words, we align them to one another inserting gaps as necessary, in a way that maximizes their similarity.
 

@@ -53,7 +53,7 @@
 	<array>
 		<dict>
 			<key>Bounds</key>
-			<string>{{57.5, 454.75}, {58, 56}}</string>
+			<string>{{54, 454.75}, {65, 56}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FitText</key>
@@ -62,8 +62,17 @@
 			<string>Resize</string>
 			<key>FontInfo</key>
 			<dict>
+				<key>Color</key>
+				<dict>
+					<key>b</key>
+					<string>0</string>
+					<key>g</key>
+					<string>0</string>
+					<key>r</key>
+					<string>0</string>
+				</dict>
 				<key>Font</key>
-				<string>Helvetica</string>
+				<string>Courier</string>
 				<key>Size</key>
 				<real>12</real>
 			</dict>
@@ -96,13 +105,13 @@
 				<key>Text</key>
 				<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
 \cocoascreenfonts1{\fonttbl\f0\fmodern\fcharset0 Courier;}
-{\colortbl;\red255\green255\blue255;\red255\green61\blue42;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf2 T\cf0 C--\cf2 T\cf0 GTT\
-ACCA\cf2 TA\cf0 TT\
-AC\cf2 T\cf0 AG\cf2 CA\cf0 T\
-AC\cf2 T\cf0 AG\cf2 T--}</string>
+\f0\fs24 \cf2 TC--T-GTT\
+ACCAT-ATT\
+ACTAGCCAT\
+ACTAGCT--}</string>
 				<key>VerticalPad</key>
 				<integer>0</integer>
 			</dict>
@@ -158,233 +167,73 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 			<string>NO</string>
 		</dict>
 		<dict>
+			<key>Bounds</key>
+			<string>{{57.5, 366.5}, {58, 56}}</string>
 			<key>Class</key>
-			<string>Group</string>
-			<key>Graphics</key>
-			<array>
+			<string>ShapedGraphic</string>
+			<key>FitText</key>
+			<string>YES</string>
+			<key>Flow</key>
+			<string>Resize</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Color</key>
 				<dict>
-					<key>Bounds</key>
-					<string>{{57.5, 416}, {44, 14}}</string>
-					<key>Class</key>
-					<string>ShapedGraphic</string>
-					<key>FitText</key>
-					<string>YES</string>
-					<key>Flow</key>
-					<string>Resize</string>
-					<key>FontInfo</key>
-					<dict>
-						<key>Font</key>
-						<string>Courier</string>
-						<key>Size</key>
-						<real>12</real>
-					</dict>
-					<key>ID</key>
-					<integer>306</integer>
-					<key>Shape</key>
-					<string>Rectangle</string>
-					<key>Style</key>
-					<dict>
-						<key>fill</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-						<key>shadow</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-						<key>stroke</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-					</dict>
-					<key>Text</key>
-					<dict>
-						<key>Pad</key>
-						<integer>0</integer>
-						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
-\cocoascreenfonts1{\fonttbl\f0\fmodern\fcharset0 Courier;}
-{\colortbl;\red255\green255\blue255;\red255\green61\blue42;}
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
-
-\f0\fs24 \cf0 AC\cf2 T\cf0 AG\cf2 T}</string>
-						<key>VerticalPad</key>
-						<integer>0</integer>
-					</dict>
-					<key>Wrap</key>
-					<string>NO</string>
+					<key>b</key>
+					<string>0</string>
+					<key>g</key>
+					<string>0</string>
+					<key>r</key>
+					<string>0</string>
 				</dict>
-				<dict>
-					<key>Bounds</key>
-					<string>{{57.5, 399.5}, {58, 14}}</string>
-					<key>Class</key>
-					<string>ShapedGraphic</string>
-					<key>FitText</key>
-					<string>YES</string>
-					<key>Flow</key>
-					<string>Resize</string>
-					<key>FontInfo</key>
-					<dict>
-						<key>Font</key>
-						<string>Courier</string>
-						<key>Size</key>
-						<real>12</real>
-					</dict>
-					<key>ID</key>
-					<integer>307</integer>
-					<key>Shape</key>
-					<string>Rectangle</string>
-					<key>Style</key>
-					<dict>
-						<key>fill</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-						<key>shadow</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-						<key>stroke</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-					</dict>
-					<key>Text</key>
-					<dict>
-						<key>Pad</key>
-						<integer>0</integer>
-						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
-\cocoascreenfonts1{\fonttbl\f0\fmodern\fcharset0 Courier;}
-{\colortbl;\red255\green255\blue255;\red255\green61\blue42;}
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
-
-\f0\fs24 \cf0 AC\cf2 T\cf0 AG\cf2 CA\cf0 T}</string>
-						<key>VerticalPad</key>
-						<integer>0</integer>
-					</dict>
-					<key>Wrap</key>
-					<string>NO</string>
-				</dict>
-				<dict>
-					<key>Bounds</key>
-					<string>{{57.5, 383}, {58, 14}}</string>
-					<key>Class</key>
-					<string>ShapedGraphic</string>
-					<key>FitText</key>
-					<string>YES</string>
-					<key>Flow</key>
-					<string>Resize</string>
-					<key>FontInfo</key>
-					<dict>
-						<key>Font</key>
-						<string>Courier</string>
-						<key>Size</key>
-						<real>12</real>
-					</dict>
-					<key>ID</key>
-					<integer>308</integer>
-					<key>Shape</key>
-					<string>Rectangle</string>
-					<key>Style</key>
-					<dict>
-						<key>fill</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-						<key>shadow</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-						<key>stroke</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-					</dict>
-					<key>Text</key>
-					<dict>
-						<key>Pad</key>
-						<integer>0</integer>
-						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
-\cocoascreenfonts1{\fonttbl\f0\fmodern\fcharset0 Courier;}
-{\colortbl;\red255\green255\blue255;\red255\green61\blue42;}
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
-
-\f0\fs24 \cf0 ACCA\cf2 TA\cf0 TT}</string>
-						<key>VerticalPad</key>
-						<integer>0</integer>
-					</dict>
-					<key>Wrap</key>
-					<string>NO</string>
-				</dict>
-				<dict>
-					<key>Bounds</key>
-					<string>{{57.5, 366.5}, {44, 14}}</string>
-					<key>Class</key>
-					<string>ShapedGraphic</string>
-					<key>FitText</key>
-					<string>YES</string>
-					<key>Flow</key>
-					<string>Resize</string>
-					<key>FontInfo</key>
-					<dict>
-						<key>Font</key>
-						<string>Courier</string>
-						<key>Size</key>
-						<real>12</real>
-					</dict>
-					<key>ID</key>
-					<integer>309</integer>
-					<key>Shape</key>
-					<string>Rectangle</string>
-					<key>Style</key>
-					<dict>
-						<key>fill</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-						<key>shadow</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-						<key>stroke</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-					</dict>
-					<key>Text</key>
-					<dict>
-						<key>Pad</key>
-						<integer>0</integer>
-						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
-\cocoascreenfonts1{\fonttbl\f0\fmodern\fcharset0 Courier;}
-{\colortbl;\red255\green255\blue255;\red255\green61\blue42;}
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
-
-\f0\fs24 \cf2 T\cf0 C\cf2 T\cf0 GTT}</string>
-						<key>VerticalPad</key>
-						<integer>0</integer>
-					</dict>
-					<key>Wrap</key>
-					<string>NO</string>
-				</dict>
-			</array>
+				<key>Font</key>
+				<string>Courier</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
-			<integer>305</integer>
+			<integer>309</integer>
+			<key>Shape</key>
+			<string>Rectangle</string>
+			<key>Style</key>
+			<dict>
+				<key>fill</key>
+				<dict>
+					<key>Draws</key>
+					<string>NO</string>
+				</dict>
+				<key>shadow</key>
+				<dict>
+					<key>Draws</key>
+					<string>NO</string>
+				</dict>
+				<key>stroke</key>
+				<dict>
+					<key>Draws</key>
+					<string>NO</string>
+				</dict>
+			</dict>
+			<key>Text</key>
+			<dict>
+				<key>Align</key>
+				<integer>0</integer>
+				<key>Pad</key>
+				<integer>0</integer>
+				<key>Text</key>
+				<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+\cocoascreenfonts1{\fonttbl\f0\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f0\fs24 \cf2 TCTGTT\
+\cf0 ACCATATT\
+ACTAGCAT\
+ACTAGT}</string>
+				<key>VerticalPad</key>
+				<integer>0</integer>
+			</dict>
+			<key>Wrap</key>
+			<string>NO</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
@@ -760,8 +609,17 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 					<string>Resize</string>
 					<key>FontInfo</key>
 					<dict>
+						<key>Color</key>
+						<dict>
+							<key>b</key>
+							<string>0</string>
+							<key>g</key>
+							<string>0</string>
+							<key>r</key>
+							<string>0</string>
+						</dict>
 						<key>Font</key>
-						<string>Helvetica</string>
+						<string>Courier</string>
 						<key>Size</key>
 						<real>12</real>
 					</dict>
@@ -794,10 +652,10 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 						<key>Text</key>
 						<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
 \cocoascreenfonts1{\fonttbl\f0\fmodern\fcharset0 Courier;}
-{\colortbl;\red255\green255\blue255;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 ACCAGGTT}</string>
+\f0\fs24 \cf2 ACCAGGTT}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
@@ -811,7 +669,7 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{289, 303}, {44, 14}}</string>
+							<string>{{285.5, 303}, {51, 14}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -820,8 +678,17 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 							<string>Resize</string>
 							<key>FontInfo</key>
 							<dict>
+								<key>Color</key>
+								<dict>
+									<key>b</key>
+									<string>0</string>
+									<key>g</key>
+									<string>0</string>
+									<key>r</key>
+									<string>0</string>
+								</dict>
 								<key>Font</key>
-								<string>Helvetica</string>
+								<string>Courier</string>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -854,10 +721,10 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
 \cocoascreenfonts1{\fonttbl\f0\fmodern\fcharset0 Courier;}
-{\colortbl;\red255\green255\blue255;\red255\green61\blue42;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 AC\cf2 T\cf0 AG\cf2 T}</string>
+\f0\fs24 \cf2 ACTACGT}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
 							</dict>
@@ -866,7 +733,7 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{280, 266.5}, {58, 14}}</string>
+							<string>{{276.5, 266.5}, {65, 14}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -875,8 +742,17 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 							<string>Resize</string>
 							<key>FontInfo</key>
 							<dict>
+								<key>Color</key>
+								<dict>
+									<key>b</key>
+									<string>0</string>
+									<key>g</key>
+									<string>0</string>
+									<key>r</key>
+									<string>0</string>
+								</dict>
 								<key>Font</key>
-								<string>Helvetica</string>
+								<string>Courier</string>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -909,10 +785,10 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
 \cocoascreenfonts1{\fonttbl\f0\fmodern\fcharset0 Courier;}
-{\colortbl;\red255\green255\blue255;\red255\green61\blue42;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 AC\cf2 T\cf0 AG\cf2 CA\cf0 T}</string>
+\f0\fs24 \cf2 ACTAGCCAT}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
 							</dict>
@@ -930,8 +806,17 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 							<string>Resize</string>
 							<key>FontInfo</key>
 							<dict>
+								<key>Color</key>
+								<dict>
+									<key>b</key>
+									<string>0</string>
+									<key>g</key>
+									<string>0</string>
+									<key>r</key>
+									<string>0</string>
+								</dict>
 								<key>Font</key>
-								<string>Helvetica</string>
+								<string>Courier</string>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -964,10 +849,10 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
 \cocoascreenfonts1{\fonttbl\f0\fmodern\fcharset0 Courier;}
-{\colortbl;\red255\green255\blue255;\red255\green61\blue42;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 ACCA\cf2 TA\cf0 TT}</string>
+\f0\fs24 \cf2 ACCATATT}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
 							</dict>
@@ -985,8 +870,17 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 							<string>Resize</string>
 							<key>FontInfo</key>
 							<dict>
+								<key>Color</key>
+								<dict>
+									<key>b</key>
+									<string>0</string>
+									<key>g</key>
+									<string>0</string>
+									<key>r</key>
+									<string>0</string>
+								</dict>
 								<key>Font</key>
-								<string>Helvetica</string>
+								<string>Courier</string>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1019,10 +913,10 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
 \cocoascreenfonts1{\fonttbl\f0\fmodern\fcharset0 Courier;}
-{\colortbl;\red255\green255\blue255;\red255\green61\blue42;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf2 T\cf0 C\cf2 T\cf0 GTT}</string>
+\f0\fs24 \cf2 TCTGTT}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
 							</dict>
@@ -1035,7 +929,7 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 							<key>FontInfo</key>
 							<dict>
 								<key>Font</key>
-								<string>Helvetica</string>
+								<string>Courier</string>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1070,7 +964,7 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 							<key>FontInfo</key>
 							<dict>
 								<key>Font</key>
-								<string>Helvetica</string>
+								<string>Courier</string>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1105,7 +999,7 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 							<key>FontInfo</key>
 							<dict>
 								<key>Font</key>
-								<string>Helvetica</string>
+								<string>Courier</string>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1140,7 +1034,7 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 							<key>FontInfo</key>
 							<dict>
 								<key>Font</key>
-								<string>Helvetica</string>
+								<string>Courier</string>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1177,7 +1071,7 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 							<key>FontInfo</key>
 							<dict>
 								<key>Font</key>
-								<string>Helvetica</string>
+								<string>Courier</string>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1214,7 +1108,7 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 							<key>FontInfo</key>
 							<dict>
 								<key>Font</key>
-								<string>Helvetica</string>
+								<string>Courier</string>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1249,7 +1143,7 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 							<key>FontInfo</key>
 							<dict>
 								<key>Font</key>
-								<string>Helvetica</string>
+								<string>Courier</string>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1284,7 +1178,7 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 							<key>FontInfo</key>
 							<dict>
 								<key>Font</key>
-								<string>Helvetica</string>
+								<string>Courier</string>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1321,7 +1215,7 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 							<key>FontInfo</key>
 							<dict>
 								<key>Font</key>
-								<string>Helvetica</string>
+								<string>Courier</string>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1356,7 +1250,7 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 							<key>FontInfo</key>
 							<dict>
 								<key>Font</key>
-								<string>Helvetica</string>
+								<string>Courier</string>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1405,7 +1299,7 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{242.5, 164}, {58, 14}}</string>
+							<string>{{239, 164}, {65, 14}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -1414,8 +1308,17 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 							<string>Resize</string>
 							<key>FontInfo</key>
 							<dict>
+								<key>Color</key>
+								<dict>
+									<key>b</key>
+									<string>0</string>
+									<key>g</key>
+									<string>0</string>
+									<key>r</key>
+									<string>0</string>
+								</dict>
 								<key>Font</key>
-								<string>Helvetica</string>
+								<string>Courier</string>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1448,10 +1351,10 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
 \cocoascreenfonts1{\fonttbl\f0\fmodern\fcharset0 Courier;}
-{\colortbl;\red255\green255\blue255;\red255\green61\blue42;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 AC\cf2 T\cf0 AGG\cf2 A\cf0 T}</string>
+\f0\fs24 \cf2 ACTAGCGAT}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
 							</dict>
@@ -1469,8 +1372,17 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 							<string>Resize</string>
 							<key>FontInfo</key>
 							<dict>
+								<key>Color</key>
+								<dict>
+									<key>b</key>
+									<string>0</string>
+									<key>g</key>
+									<string>0</string>
+									<key>r</key>
+									<string>0</string>
+								</dict>
 								<key>Font</key>
-								<string>Helvetica</string>
+								<string>Courier</string>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1503,10 +1415,10 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 								<key>Text</key>
 								<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
 \cocoascreenfonts1{\fonttbl\f0\fmodern\fcharset0 Courier;}
-{\colortbl;\red255\green255\blue255;\red255\green61\blue42;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 ACCA\cf2 T\cf0 GTT}</string>
+\f0\fs24 \cf2 ACCATGTT}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
 							</dict>
@@ -1519,7 +1431,7 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 							<key>FontInfo</key>
 							<dict>
 								<key>Font</key>
-								<string>Helvetica</string>
+								<string>Courier</string>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1554,7 +1466,7 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 							<key>FontInfo</key>
 							<dict>
 								<key>Font</key>
-								<string>Helvetica</string>
+								<string>Courier</string>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1591,7 +1503,7 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 							<key>FontInfo</key>
 							<dict>
 								<key>Font</key>
-								<string>Helvetica</string>
+								<string>Courier</string>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1626,7 +1538,7 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 							<key>FontInfo</key>
 							<dict>
 								<key>Font</key>
-								<string>Helvetica</string>
+								<string>Courier</string>
 								<key>Size</key>
 								<real>12</real>
 							</dict>
@@ -1670,8 +1582,17 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 					<string>Resize</string>
 					<key>FontInfo</key>
 					<dict>
+						<key>Color</key>
+						<dict>
+							<key>b</key>
+							<string>0</string>
+							<key>g</key>
+							<string>0</string>
+							<key>r</key>
+							<string>0</string>
+						</dict>
 						<key>Font</key>
-						<string>Helvetica</string>
+						<string>Courier</string>
 						<key>Size</key>
 						<real>12</real>
 					</dict>
@@ -1704,10 +1625,10 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 						<key>Text</key>
 						<string>{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
 \cocoascreenfonts1{\fonttbl\f0\fmodern\fcharset0 Courier;}
-{\colortbl;\red255\green255\blue255;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 ACCAGGTT}</string>
+\f0\fs24 \cf2 ACCAGGTT}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
@@ -1766,7 +1687,7 @@ AC\cf2 T\cf0 AG\cf2 T--}</string>
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2015-12-14 21:51:46 +0000</string>
+	<string>2015-12-14 22:19:35 +0000</string>
 	<key>Modifier</key>
 	<string>Greg Caporaso</string>
 	<key>NotesVisible</key>
