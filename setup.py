@@ -48,6 +48,6 @@ setup(name='An-Introduction-To-Applied-Bioinformatics',
                         'qiime-default-reference >= 0.1.3, < 0.2.0',
                         'pandas >= 0.15.0, < 0.16.0',
                         'markdown2 >= 2.3.0',
-                        'ipymd', 'tornado',
+                        'ipymd', 'tornado', 'tabulate',
                         'networkx >= 1.9.1, < 2.0.0'],
       classifiers=classifiers)

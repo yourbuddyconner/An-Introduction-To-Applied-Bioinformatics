@@ -9,6 +9,8 @@ Imagine you have three sequences - call them ``r1``and ``r2`` (*r* is for *refer
 >>> %pylab inline
 >>> from __future__ import division, print_function
 ...
+>>> import numpy as np
+>>> from IPython.core.display import HTML
 >>> from IPython.core import page
 >>> page.page = print
 ```
@@ -109,73 +111,74 @@ Here's how you'd import a function and then view its source code:
 
 Now let's look at how to align these sequences.
 
-**Step 1.** Create a matrix, where the columns represent the positions in ``seq1`` and the rows represent the positions in ``seq2``.
+**Step 1.** Create a matrix (or *array*), where the columns represent the positions in ``seq1`` and the rows represent the positions in ``seq2``. We'll initialize this matrix with zeros.
 
 ```python
->>> data = []
->>> for p in seq2:
-...     data.append(['-']*len(seq1))
+>>> num_rows = len(seq2)
+>>> num_cols = len(seq1)
+>>> data = np.zeros(shape=(num_rows, num_cols), dtype=np.int)
 ...
->>> print(show_table(seq1, seq2, data))
+>>> HTML(show_table(seq1, seq2, data))
 ```
 
-**Step 2.** Score the cells where the row value is equal to the column value as ``1``, and the others as ``0``.
+**Step 2.** Score the cells so if the characters at the corresponding row and column are the same the value is changed from zero to one. We can then revew the resulting matrix. For clarity, we'll have ``show_table`` hide the zero values.
 
 ```python
->>> data = []
->>> for b2 in seq2:
-...     row = []
-...     for b1 in seq1:
-...         if b1 == b2:
-...             row.append(1)
-...         else:
-...             row.append(0)
-...     data.append(row)
+>>> for row_number, row_character in enumerate(seq2):
+...     for col_number, col_character in enumerate(seq1):
+...         if row_character == col_character:
+...             data[row_number, col_number] = 1
 ...
->>> print(show_table(seq1, seq2, data, hide_zeros=True))
+>>> HTML(show_table(seq1, seq2, data, hide_zeros=True))
 ```
 
-**Step 3**: Identify the "high-scoring" or contiguous diagonals. You can score each diagonal by summing the values in each cell.
+**Step 3**: Identify the longest diagonal stretches of non-zero characters (we'll call these *diagonals*). Diagonals indicate segments of the two sequences that are identical and uninterrupted by mismatched characters (substitution events) or indel events. 
+
+We can identify the longest diagonals as follows:
 
 ```python
->>> line_format = "%3s" * (len(seq1) + 1)
->>> scored_data = []
->>> for i, drow in enumerate(data):
-...     row = []
-...     for j, value in enumerate(drow):
-...         if value > 0:
-...             if i == 0 or j == 0:
-...                 row.append(value)
-...             else:
-...                 row.append(value + scored_data[i-1][j-1])
-...         else:
-...             row.append(0)
-...     scored_data.append(row)
+>>> # create a copy of our data matrix to work with, so we
+... # leave the original untouched.
+... summed_data = data.copy()
+>>> # iterate over the cells in our data matrix, starting in
+... # the second row and second column
+... for i in range(1, summed_data.shape[0]):
+...     for j in range(1, summed_data.shape[1]):
+...         # if the value in the current cell is greater than zero
+...         # (i.e., the characters at the corresponding pair of
+...         # sequence positions are the same), add the value from the
+...         # cell that is diagonally up and to the left.
+...         if summed_data[i, j] > 0:
+...             summed_data[i, j] += summed_data[i-1][j-1]
 ...
->>> print(show_table(seq1, seq2, scored_data, hide_zeros=True))
+>>> # Identify the longest diagonal
+... print("The longest diagonal is %d characters long." % summed_data.max())
+>>> HTML(show_table(seq1, seq2, summed_data, hide_zeros=True))
 ```
 
-**Step 4**: Transcribe and score alignments including gaps (subtract one for every non-diagonal cell).
+**Step 4**: Next, we'd want to transcribe some of the possible alignments that arise from this process. 
 
-You can now identify the highest scoring contiguous alignments - but notice that this only represents a portion of the full sequences, and there are other regions that are apparently homologous (as evidenced by high alignment scores).
+We're going to gloss over how to do this algorithmically for the moment, as we'll come back to that in a lot of detail later in this chapter. Briefly, what we want to do is start with the longest diagonal and work bacwards to transcribe the alignment by writing down the matching characters. When we encounter a break in the diagonal, we find the next highest score diagonal that starts in a cell that is up and/or to the left of the cell when the previous diagonal you were following ends. For every cell that you move upwards, you'd insert a gap in the sequence on the horizontal axis of your matrix. For every cell that you move leftwards, you'd insert a gap in the sequence on the vertical axis of your matrix.
 
-To transcribe a gapped alignment, add a gap character in the first (horizontal) sequence for each vertical line in the matrix, and a gap character in the second (vertical) sequence for each horizontal line in the matrix.
+If this is confusing, don't worry about it for the moment. We'll be back to this in a lot more detail soon. 
 
-``ACCGGTGGAACCGG-TAACACCCAC``
+Here are two possible alignments:
 
-``ACCGGT--AACCGGTTAACACCCAC``
+Alignment 1:
+```
+ACCGGTGGAACCGG-TAACACCCAC
+ACCGGT--AACCGGTTAACACCCAC
+```
 
-Alignment score: 19
+Alignment 2:
+```
+ACCGGTGGAACCGGTAACACCCAC
+ACCGGT--------TAACACCCAC
+```
 
-``ACCGGTGGAACCGGTAACACCCAC``
+**Remember that an alignment represents a hypothesis about the evolutionary history of a sequence.  Which of these hypotheses do you think is more likely to be true based on what you know about sequence evolution?** Why might the first alignment be the more biologically relevant one? Why might the second? 
 
-``ACCGGT--------TAACACCCAC``
-
-Alignment score: 8
-
-**Remember that an alignment represents a hypothesis about the evolutionary history of a sequence.  Which of these hypotheses do you think is more likely to be true based on what you know about sequence evolution?**
-
-**As an exercise**, go back to where we defined `seq1` and `seq2` and redefine one or both of those as other sequences. Execute the code through here and transcribe the highest scoring alignment.
+**As an exercise**, go back to where we defined `seq1` and `seq2` and re-define one or both of those as other sequences. Execute the code through here and see how the matrices change.
 
 ### Why this simple procedure is too simple
 
@@ -230,7 +233,7 @@ Here's a global view of the matrix.
 ...         row.append(blosum50[aa1][aa2])
 ...     data.append(row)
 ...
->>> print(show_table(aas, aas, data))
+>>> HTML(show_table(aas, aas, data))
 ```
 
 ## Needleman-Wunsch global pairwise sequence alignment <link src='15efc2'/>
@@ -251,7 +254,7 @@ Now let's get started on using this to align a pair of sequences.
 >>> for p in seq2:
 ...     data.append(['-']*len(seq1))
 ...
->>> print(show_table(seq1, seq2, data))
+>>> HTML(show_table(seq1, seq2, data))
 ```
 
 **Step 2**:  Using a substitution matrix, score each cell in the matrix.
@@ -265,7 +268,7 @@ Now let's get started on using this to align a pair of sequences.
 ```python
 >>> score_matrix = generate_score_matrix(seq1,seq2,blosum50)
 ...
->>> print(show_table(seq1,
+>>> HTML(show_table(seq1,
 ...                     seq2,
 ...                     score_matrix))
 ```
@@ -299,7 +302,7 @@ For the sake of this exercise, define the gap penalty, $d$, as $d=8$.
 >>> for p in padded_seq2:
 ...     data.append(['-']*len(padded_seq1))
 ...
->>> print(show_table(padded_seq1, padded_seq2, data))
+>>> HTML(show_table(padded_seq1, padded_seq2, data))
 ```
 
 Initializing this would result in the following.
@@ -315,7 +318,7 @@ Initializing this would result in the following.
 >>> for j in range(1,len(padded_seq1)):
 ...     data[0][j] = data[0][j-1] - d
 ...
->>> print(show_table(padded_seq1, padded_seq2, data, cell_width=4))
+>>> HTML(show_table(padded_seq1, padded_seq2, data, cell_width=4))
 ```
 
 Next, we'll compute the scores for all of the other cells in the matrix, starting at position $(1, 1)$.
@@ -433,7 +436,7 @@ $$
 >>> for p in padded_seq2:
 ...     data.append(['-']*len(padded_seq1))
 ...
->>> print(show_table(padded_seq1, padded_seq2, data))
+>>> HTML(show_table(padded_seq1, padded_seq2, data))
 ```
 
 ```python
@@ -444,7 +447,7 @@ $$
 >>> for j in range(1,len(padded_seq1)):
 ...     data[0][j] = 0
 ...
->>> print(show_table(padded_seq1, padded_seq2, data))
+>>> HTML(show_table(padded_seq1, padded_seq2, data))
 ```
 
 Next, there is one additional term in the scoring function:
