@@ -31,7 +31,7 @@ Imagine you have three sequences - call them ``r1``and ``r2`` (*r* is for *refer
 
 In this case, ``q1`` has a smaller distance to ``r1`` than it does to ``r2``, so ``q1`` is more similar to ``r1`` than ``r2``. But it's not always that simple.
 
-Here we've assuming that only *substitution events* have occurred, meaning one DNA base was substituted for with another. Let's define ``q2``, which is the same as ``q1`` except that a single base has been deleted at the beginning of the sequence, and a single base has been inserted at the end of the sequence.
+Here we've assumed that only *substitution events* have occurred, meaning one DNA base was substituted for with another. Let's define ``q2``, which is the same as ``q1`` except that a single base has been deleted at the beginning of the sequence, and a single base has been inserted at the end of the sequence.
 
 ```python
 >>> q2 = DNA("TCCAGGTAAACGGTGACCAGGTACCAGTTGCGTTTGTTGTAGGAGACACGGGGACCCAT")
@@ -58,19 +58,17 @@ The *alignment* is of these two sequences is clear if we print them  out, one on
 
 Scanning through these two sequences, we can see that they are largely identical, with the exception of one ``-`` character, and about 25% *substitutions* of one base for another.
 
-When working with a pair of sequences, when we see a gap we generally won't know whether a deletion occurred in one sequence, or an insertion occurred in the other. For that reason, you will often see the term *indel* used to refer to these events, indicating that either an insertion or a deletion occurred.
-
 ## What is a sequence alignment? <link src='e63a4f'/>
 
 Let's take a minute to think about sequence evolution and what a biological sequence alignment actually is. Over the course of evolution, the sequence will likely change, most frequently due to random errors in replication (or the copying of a DNA sequence), or **mutations**. Some of the types of mutation events that can occur are:
 
 * **substitutions**, where one base (or amino acid, in protein sequences) is replaced with another;
-* **insertions**, where one or more contiguous bases are inserted in a sequence;
+* **insertions**, where one or more contiguous bases are inserted into a sequence;
 * and **deletions**, where one or more contiguous bases are deleted from a sequence.
 
 (Other types of mutation events can occur, but we're going to focus on these for now.)
 
-Figure 1a-b illustrates how one ancestral DNA sequence, over time, might evolve into two derived sequences. When a two or more sequences are derived from a single ancestral sequence, as is the case in this example, those sequences are said to be **homologs** of one another, or homologous sequences. On a piece of paper, make a guess about which of these types of events occurred where over our hypothetical evolution of these sequences.
+Figure 1 illustrates how one ancestral DNA sequence (Figure 1a), over time, might evolve into two derived sequences (Figure 1b). When two or more sequences are derived from a single ancestral sequence, as is the case in this example, those sequences are said to be **homologs** of one another, or homologous sequences. On a piece of paper, make a hypothesis about which of these types of mutation events occurred where over our hypothetical evolution of these sequences.
 
 <figure>
     <img src="https://raw.githubusercontent.com/gregcaporaso/An-Introduction-To-Applied-Bioinformatics/pw-align-edits/book/fundamentals/images/alignment.png">
@@ -78,23 +76,19 @@ Figure 1a-b illustrates how one ancestral DNA sequence, over time, might evolve 
 </figure>
 <p>
 
-The problem of **pairwise sequence alignment** is, **given two sequences, generate a hypothesis about which bases were derived from a common ancestor**. In practice, we develop this hypothesis by aligning the sequences to one another inserting gaps as necessary, in a way that maximizes their similarity.
+**The goal of pairwise sequence alignment is, given two sequences, to generate a hypothesis about which bases were derived from a common ancestor.** In practice, we develop this hypothesis by aligning the sequences to one another inserting gaps as necessary, in a way that maximizes their similarity.
 
-In nearly all cases, all we have to work with is the modern (derived) sequences, as illustrated in Figure 1c. The ancestral sequence is not something we have access to (for example, because the organism whose genome it was present in went extinct 100 million years ago).
+In nearly all cases, the only sequences we have to work with are the modern (derived) sequences, as illustrated in Figure 1c. The ancestral sequence is not something we have access to (for example, because the organism whose genome it was present in went extinct 100 million years ago).
 
-Figure 1d illustrates an alignment of these two sequences. It is essential to note at this point that this is one possible alignment of these sequences. And just as the notes you made about which types of mutation events may have happened where represents your *hypothesis* about the evolutionary events that took place, a sequence alignment is only a hypothesis.
+Figure 1d illustrates one possible alignment of these two sequences. Just as the notes you made about which types of mutation events may have happened where represents your *hypothesis* about the evolutionary events that took place, a sequence alignment that you might get from a computer program such as BLAST is also only a hypothesis. You can think of an alignment as a table, where the rows are sequences and the columns are positions in those sequences. When you have two or more aligned sequences, there will, by definition, always be the same number of columns in each row. Each column in your alignment represents a hypothesis about the evolutionary events that occurred at that position since the last ancestor of the aligned sequences (the sequence in Figure 1a in our example).
 
-You can think of an alignment as a table, where the rows are sequences and the columns are positions in those sequences. When you have two or more aligned sequences, there will, by definition, always be the same number of columns in each row. Each column in your alignment represents a hypothesis about the evolution events that occurred at that position since the last ancestor of the aligned sequences (the sequence in Figure 1a in our example).
+One thing that's worth pointing out at this point is that because we don't know what the ancestral sequence was, when we encounter a gap in a pairwise alignment, we generally won't know whether a deletion occurred in one sequence, or an insertion occurred in the other. For that reason, you will often see the term **indel** used to refer to these either an insertion or deletion events.
 
-As you can likely tell from this example, sequence alignment is tricky for several reasons:
- * Because of insertion/deletion mutations, it's not always clear which bases or amino acid residues are derived from the same common ancestral base or amino acid residue.
- * As sequences get long, there may be many possible ways to align them. We need to figure out which of those alignments is the best hypothesis in light of what we know about the (very messy) underlying biological systems.
- * As sequences are more distantly related, there are fewer identical stretches of bases or amino acid residues, making it harder to determine what the most biologically relevant alignment is.
- * When the sequences get very long, sequence alignment becomes a very computationally expensive problem.
-
-In the next section we'll work through one algorithm for aligning a pair of sequences. As you work through this exercise, think about why it might be too simple given what you know about biological sequence evolution.
+In the next section we'll work through our first bioinformatics algorithm, in this case a very simple (and also simplistic) method for aligning a pair of sequences. As you work through this exercise, think about why it might be too simple given what you know about biological sequences.
 
 ## A simple procedure for aligning a pair of sequences <link src='86c6b7'/>
+
+**TODO: update this to be protein sequences, for consistency with the rest of the chapter.**
 
 Aligning ``seq1`` and ``seq2`` can be achieved algorithmically in a few steps. First, let's define the sequences that we want to align.
 
@@ -199,6 +193,8 @@ Another important consideration as we think about algorithms for aligning pairs 
 Over the next several sections we'll explore ways of addressing the two issues noted above. We'll introduce the problem of the computational complexity at the end of this chapter, and explore approaches for addressing that (i.e., making database searching faster) in the next chapter.
 
 ## Substitution matrices <link src='9f5e71'/>
+
+**TODO: I started editing this section before realizing that I needed to update some stuff above.**
 
 The first of the limitations we identified above was that all matches and mismatches were scored equally when aligning a pair of sequences. To understand why this is a problem, let's think about the meaning of match and mismatches.
 
