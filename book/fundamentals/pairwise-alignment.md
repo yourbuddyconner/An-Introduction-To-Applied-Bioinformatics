@@ -180,7 +180,7 @@ ACCGGT--------TAACACCCAC
 
 **As an exercise**, go back to where we defined `seq1` and `seq2` and re-define one or both of those as other sequences. Execute the code through here and see how the matrices change.
 
-### Why this simple procedure is too simple
+### Why this simple procedure is too simplistic
 
 I suggested above that you keep a list of assumptions that are made by this approach. Here are a couple of the very problematic ones.
 
@@ -195,7 +195,7 @@ Over the next several sections we'll explore ways of addressing the two issues n
 
 ## Substitution matrices <link src='9f5e71'/>
 
-**TODO: I started editing this section before realizing that I needed to update some stuff above.**
+**TODO: pick up here! I started editing this section before realizing that I needed to update some stuff above.**
 
 The first of the limitations we identified above was that all matches and mismatches were scored equally when aligning a pair of sequences. To understand why this is a problem, let's think about the meaning of match and mismatches.
 
