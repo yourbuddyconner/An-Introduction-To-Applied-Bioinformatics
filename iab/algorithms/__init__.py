@@ -55,7 +55,7 @@ def hamming_distance(s1, s2):
     return s1.distance(s2)
 
 
-def format_matrix(row_headers, col_headers, data, hide_zeros=False, cell_width=3):
+def show_table(row_headers, col_headers, data, hide_zeros=False, cell_width=3):
     result = []
     cell_format = "%" + str(cell_width) + "s"
     line_format = cell_format * (len(row_headers) + 1)

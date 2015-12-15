@@ -71,12 +71,12 @@ Let's take a minute to think about sequence evolution and what a biological sequ
 Figure 1 illustrates how one ancestral DNA sequence (Figure 1a), over time, might evolve into two derived sequences (Figure 1b). When two or more sequences are derived from a single ancestral sequence, as is the case in this example, those sequences are said to be **homologs** of one another, or homologous sequences. On a piece of paper, make a hypothesis about which of these types of mutation events occurred where over our hypothetical evolution of these sequences.
 
 <figure>
-    <img src="https://raw.githubusercontent.com/gregcaporaso/An-Introduction-To-Applied-Bioinformatics/pw-align-edits/book/fundamentals/images/alignment.png">
-    <figcaption>Figure 1: Sequence evolution and biological sequence alignment.</figcaption>
+    <img src="images/alignment.png">
+    <figcaption>Figure 1: Sequence evolution and pairwise sequence alignment.</figcaption>
 </figure>
 <p>
 
-**The goal of pairwise sequence alignment is, given two sequences, to generate a hypothesis about which bases were derived from a common ancestor.** In practice, we develop this hypothesis by aligning the sequences to one another inserting gaps as necessary, in a way that maximizes their similarity.
+**The goal of pairwise sequence alignment is, given two sequences, to generate a hypothesis about which sequence positions derived from a common ancestral sequence position.** In practice, we develop this hypothesis by aligning the sequences to one another inserting gaps as necessary, in a way that maximizes their similarity. This is a **maximum parsimony** approach, where we assume that the simplest explanation (the one involving the fewest or least extreme mutation events) is the most likely.
 
 In nearly all cases, the only sequences we have to work with are the modern (derived) sequences, as illustrated in Figure 1c. The ancestral sequence is not something we have access to (for example, because the organism whose genome it was present in went extinct 100 million years ago).
 
@@ -88,25 +88,23 @@ In the next section we'll work through our first bioinformatics algorithm, in th
 
 ## A simple procedure for aligning a pair of sequences <link src='86c6b7'/>
 
-**TODO: update this to be protein sequences, for consistency with the rest of the chapter.**
-
-Aligning ``seq1`` and ``seq2`` can be achieved algorithmically in a few steps. First, let's define the sequences that we want to align.
+Lets define two sequences, ``seq1`` and ``seq2``, and develop an approach for aligning them.
 
 ```python
 >>> seq1 = "ACCGGTGGAACCGGTAACACCCAC"
 >>> seq2 = "ACCGGTAACCGGTTAACACCCAC"
 ```
 
-I'm going to use a function in the following cells called ``format_matrix`` to display the alignment. Once an object has been imported, you can always view the source code for that function. This will be useful as we begin to explore some of the algorithms that are in use throughout these notebooks.
+I'm going to use a function in the following cells called ``show_table`` to display a table that we're going to use to develop our alignment. Once a function has been imported, you can view the source code for that function. This will be useful as we begin to explore some of the algorithms that are in use throughout these notebooks, and you should spend time reading the source code until you're sure that you understand what's happening.
 
-For example:
+Here's how you'd import a function and then view its source code:
 
 ```python
->>> from iab.algorithms import format_matrix
+>>> from iab.algorithms import show_table
 ```
 
 ```python
->>> %psource format_matrix
+>>> %psource show_table
 ```
 
 Now let's look at how to align these sequences.
@@ -118,7 +116,7 @@ Now let's look at how to align these sequences.
 >>> for p in seq2:
 ...     data.append(['-']*len(seq1))
 ...
->>> print(format_matrix(seq1, seq2, data))
+>>> print(show_table(seq1, seq2, data))
 ```
 
 **Step 2.** Score the cells where the row value is equal to the column value as ``1``, and the others as ``0``.
@@ -134,7 +132,7 @@ Now let's look at how to align these sequences.
 ...             row.append(0)
 ...     data.append(row)
 ...
->>> print(format_matrix(seq1, seq2, data, hide_zeros=True))
+>>> print(show_table(seq1, seq2, data, hide_zeros=True))
 ```
 
 **Step 3**: Identify the "high-scoring" or contiguous diagonals. You can score each diagonal by summing the values in each cell.
@@ -154,7 +152,7 @@ Now let's look at how to align these sequences.
 ...             row.append(0)
 ...     scored_data.append(row)
 ...
->>> print(format_matrix(seq1, seq2, scored_data, hide_zeros=True))
+>>> print(show_table(seq1, seq2, scored_data, hide_zeros=True))
 ```
 
 **Step 4**: Transcribe and score alignments including gaps (subtract one for every non-diagonal cell).
@@ -232,7 +230,7 @@ Here's a global view of the matrix.
 ...         row.append(blosum50[aa1][aa2])
 ...     data.append(row)
 ...
->>> print(format_matrix(aas, aas, data))
+>>> print(show_table(aas, aas, data))
 ```
 
 ## Needleman-Wunsch global pairwise sequence alignment <link src='15efc2'/>
@@ -253,7 +251,7 @@ Now let's get started on using this to align a pair of sequences.
 >>> for p in seq2:
 ...     data.append(['-']*len(seq1))
 ...
->>> print(format_matrix(seq1, seq2, data))
+>>> print(show_table(seq1, seq2, data))
 ```
 
 **Step 2**:  Using a substitution matrix, score each cell in the matrix.
@@ -267,7 +265,7 @@ Now let's get started on using this to align a pair of sequences.
 ```python
 >>> score_matrix = generate_score_matrix(seq1,seq2,blosum50)
 ...
->>> print(format_matrix(seq1,
+>>> print(show_table(seq1,
 ...                     seq2,
 ...                     score_matrix))
 ```
@@ -301,7 +299,7 @@ For the sake of this exercise, define the gap penalty, $d$, as $d=8$.
 >>> for p in padded_seq2:
 ...     data.append(['-']*len(padded_seq1))
 ...
->>> print(format_matrix(padded_seq1, padded_seq2, data))
+>>> print(show_table(padded_seq1, padded_seq2, data))
 ```
 
 Initializing this would result in the following.
@@ -317,7 +315,7 @@ Initializing this would result in the following.
 >>> for j in range(1,len(padded_seq1)):
 ...     data[0][j] = data[0][j-1] - d
 ...
->>> print(format_matrix(padded_seq1, padded_seq2, data, cell_width=4))
+>>> print(show_table(padded_seq1, padded_seq2, data, cell_width=4))
 ```
 
 Next, we'll compute the scores for all of the other cells in the matrix, starting at position $(1, 1)$.
@@ -435,7 +433,7 @@ $$
 >>> for p in padded_seq2:
 ...     data.append(['-']*len(padded_seq1))
 ...
->>> print(format_matrix(padded_seq1, padded_seq2, data))
+>>> print(show_table(padded_seq1, padded_seq2, data))
 ```
 
 ```python
@@ -446,7 +444,7 @@ $$
 >>> for j in range(1,len(padded_seq1)):
 ...     data[0][j] = 0
 ...
->>> print(format_matrix(padded_seq1, padded_seq2, data))
+>>> print(show_table(padded_seq1, padded_seq2, data))
 ```
 
 Next, there is one additional term in the scoring function:
